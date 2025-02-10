@@ -19,7 +19,11 @@ public static class ServiceCollectionExtensions
                 var settings = serviceProvider.GetRequiredService<IOptions<FundaOfferApiSettings>>().Value;
                 client.BaseAddress = new Uri(settings.Url);
             }
-        );
+        )
+        // Default values for AddStandardResilienceHandler can be found here:
+        // https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli#standard-resilience-handler-defaults
+        .AddStandardResilienceHandler(); 
+        
         services.AddScoped<IFundaOfferApiProvider, FundaOfferApiProvider>();
         return services;
     }
