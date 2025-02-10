@@ -2,7 +2,7 @@
 
 public class AgentOfferAggregate
 {
-    public required int RealEstateAgentId { get; init; }
-    public required string RealEstateAgentName { get; init; }
+    public required int AgentId { get; init; }
+    public required string AgentName { get; init; }
     public required int OfferCount { get; init; }
 }

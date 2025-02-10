@@ -12,8 +12,8 @@ public class AgentReportHandler(IFundaOfferApiProvider fundaOfferApiProvider) : 
         return allOffers?.GroupBy(x => x.AgentId)
             .Select(g => new AgentOfferAggregate
             {
-                RealEstateAgentId = g.Key,
-                RealEstateAgentName = g.First().AgentName,
+                AgentId = g.Key,
+                AgentName = g.First().AgentName,
                 OfferCount = g.Select(x => x.Id).Distinct().Count()
             })
             .OrderByDescending(x => x.OfferCount)
