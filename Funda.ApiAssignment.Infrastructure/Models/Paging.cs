@@ -6,6 +6,4 @@ public class Paging
 {
     [JsonPropertyName("AantalPaginas")]
     public int PageCount { get; init; }
-    [JsonPropertyName("HuidigePagina")]
-    public int CurrentPage { get; init; }
 }
