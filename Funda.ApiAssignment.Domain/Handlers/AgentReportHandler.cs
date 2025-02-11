@@ -9,13 +9,17 @@ public class AgentReportHandler(IFundaOfferApiProvider fundaOfferApiProvider) : 
     {
         var allOffers = await fundaOfferApiProvider.GetAllOffers(offerType, searchQuery);
 
-        return allOffers?.GroupBy(x => x.AgentId)
-            .Select(g => new AgentOfferAggregate
+        var agentsByOfferCount = from offer in allOffers
+            group offer by offer.AgentId
+            into agentGroup
+            select new AgentOfferAggregate
             {
-                AgentId = g.Key,
-                AgentName = g.First().AgentName,
-                OfferCount = g.Select(x => x.Id).Distinct().Count()
-            })
+                AgentId = agentGroup.Key,
+                AgentName = agentGroup.First().AgentName,
+                OfferCount = agentGroup.Count()
+            };
+
+        return agentsByOfferCount
             .OrderByDescending(x => x.OfferCount)
             .Take(10)
             .ToArray();

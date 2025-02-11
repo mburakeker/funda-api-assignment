@@ -1,5 +1,4 @@
 using Funda.ApiAssignment.API.Setup;
-using Funda.ApiAssignment.Domain.Handlers;
 
 namespace Funda.ApiAssignment.API;
 
@@ -13,6 +12,7 @@ public class Program
         builder.Services.AddOpenApi();
         builder.Services.AddInfrastructureServices();
         builder.Services.AddDomainServices();
+        builder.Services.AddControllers();
 
         var app = builder.Build();
 
@@ -25,15 +25,7 @@ public class Program
                 options.SwaggerEndpoint("/openapi/v1.json", "v1");
             });
         }
-        
-        app.MapGet("/top-10-agents-in-amsterdam-for-sale", (IAssignmentCaseHandler assignmentCaseHandler) 
-            => assignmentCaseHandler.GetTop10AgentsInAmsterdamForSale());
-        
-        app.MapGet("/top-10-agents-in-amsterdam-with-garden-for-sale", (IAssignmentCaseHandler assignmentCaseHandler) 
-            => assignmentCaseHandler.GetTop10AgentsInAmsterdamWithGardenForSale());
-        
-        app.MapGet("/top-10-agents-in-bussum-with-garden-for-sale", (IAssignmentCaseHandler assignmentCaseHandler) 
-            => assignmentCaseHandler.GetTop10AgentsInBussumWithGardenForSale());
+        app.MapControllers();
 
         app.Run();
     }

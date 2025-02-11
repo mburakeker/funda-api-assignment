@@ -1,8 +1,11 @@
-﻿using Funda.ApiAssignment.Domain.Handlers;
+﻿using System.Net;
+using Funda.ApiAssignment.Domain.Handlers;
 using Funda.ApiAssignment.Domain.Providers;
 using Funda.ApiAssignment.Infrastructure.Providers;
 using Funda.ApiAssignment.Infrastructure.Setup;
+using Microsoft.Extensions.Http.Resilience;
 using Microsoft.Extensions.Options;
+using Polly;
 
 namespace Funda.ApiAssignment.API.Setup;
 
@@ -19,10 +22,19 @@ public static class ServiceCollectionExtensions
                 var settings = serviceProvider.GetRequiredService<IOptions<FundaOfferApiSettings>>().Value;
                 client.BaseAddress = new Uri(settings.Url);
             }
-        )
-        // Default values for AddStandardResilienceHandler can be found here:
-        // https://learn.microsoft.com/en-us/dotnet/core/resilience/http-resilience?tabs=dotnet-cli#standard-resilience-handler-defaults
-        .AddStandardResilienceHandler(); 
+        ).AddResilienceHandler("FundaOfferApiResiliencePipeline", builder =>
+        {
+            // Refer to https://www.pollydocs.org/strategies/retry.html#defaults for retry defaults
+            builder.AddRetry(new HttpRetryStrategyOptions
+            {
+                MaxRetryAttempts = 5,
+                Delay = TimeSpan.FromSeconds(5),
+                BackoffType = DelayBackoffType.Exponential,
+                ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                    .Handle<HttpRequestException>()
+                    .HandleResult(response => response.StatusCode == HttpStatusCode.Unauthorized)
+            });
+        });
         
         services.AddScoped<IFundaOfferApiProvider, FundaOfferApiProvider>();
         return services;
@@ -31,7 +43,6 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDomainServices(this IServiceCollection services)
     {
         services.AddScoped<IAgentReportHandler, AgentReportHandler>();
-        services.AddScoped<IAssignmentCaseHandler, AssignmentCaseHandler>();
         return services;
     }
 }

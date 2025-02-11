@@ -4,5 +4,5 @@ namespace Funda.ApiAssignment.Infrastructure.Providers;
 
 public interface IFundaOfferApiClient
 {
-    public Task<GetOffersResponse?> GetOffers(string offerType, string? searchQuery, int? pageId, int? pageSize);
+    public Task<SearchResult?> GetOffers(string offerType, string searchQuery, int pageId, int pageSize);
 }
