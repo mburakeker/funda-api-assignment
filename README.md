@@ -11,6 +11,7 @@ This project is a .NET application that interacts with the Funda API to fetch re
 - [Running Tests](#running-tests)
 - [Project Structure](#project-structure)
 - [Design Decisions and Remarks](#design-decisions-and-remarks)
+- [Results](#results)
 
 ## Getting Started
 
@@ -79,3 +80,34 @@ dotnet test
    - Projects depend on each other based on the Layer Design in the document and are logically separated.
 - Used System.Net.Http.Json for consuming REST APIs instead of REST client libraries to keep it simple.
 - For resilience, Microsoft.Extensions.Http.Resilience is used which is based on Polly
+
+## Results
+1. Makelaar's in Amsterdam that have the most objects listed for sale
+
+| Makelaar Id  | Offer Count |
+| ----- | ----- |
+| 24648  | 118  |
+| 24705  | 80  |
+| 24067  | 79  |
+| 24605  | 73  |
+| 24065  | 64  |
+| 24592  | 59  |
+| 24079  | 53  |
+| 24848  | 50  |
+| 24053  | 50  |
+| 24131  | 49  |
+
+2. Makelaar's in Amsterdam that have the most objects with tuin listed for sale
+
+| Makelaar Id  | Offer Count |
+| ----- | ----- |
+| 24648  | 29  |
+| 24067  | 19  |
+| 24065  | 16  |
+| 24594  | 15  |
+| 24079  | 11  |
+| 24592  | 10  |
+| 60557  | 10  |
+| 12285  | 10  |
+| 24848  | 8  |
+| 24605  | 8  |
