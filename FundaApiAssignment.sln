@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funda.ApiAssignment.Infrast
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funda.ApiAssignment.Domain.Tests", "Funda.ApiAssignment.Domain.Tests\Funda.ApiAssignment.Domain.Tests.csproj", "{83E60AAE-57D3-47C7-AFED-7D94B02D9872}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funda.ApiAssignment.Infrastructure.Tests", "Funda.ApiAssignment.Infrastructure.Tests\Funda.ApiAssignment.Infrastructure.Tests.csproj", "{E9DF825C-80CA-4649-A1E8-1D791CDF3582}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{83E60AAE-57D3-47C7-AFED-7D94B02D9872}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83E60AAE-57D3-47C7-AFED-7D94B02D9872}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83E60AAE-57D3-47C7-AFED-7D94B02D9872}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9DF825C-80CA-4649-A1E8-1D791CDF3582}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9DF825C-80CA-4649-A1E8-1D791CDF3582}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9DF825C-80CA-4649-A1E8-1D791CDF3582}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9DF825C-80CA-4649-A1E8-1D791CDF3582}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
